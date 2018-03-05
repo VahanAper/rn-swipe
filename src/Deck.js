@@ -22,8 +22,22 @@ class Deck extends React.Component {
                     y: gesture.dy,
                 });
             },
-            onPanResponderRelease: () => {},
+            onPanResponderRelease: () => {
+                this.resetPosition()
+            },
         });
+    }
+    
+    resetPosition = () => {
+        Animated.spring(
+            this.position, 
+            {
+                toValue: {
+                    x: 0,
+                    y: 0,
+                },
+            },
+        ).start();
     }
     
     getCardStyle = () => {

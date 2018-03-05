@@ -1,18 +1,50 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+} from 'react-native';
+import {
+    Card,
+    Button,
+} from 'react-native-elements';
 
-import Ball from './src/Ball';
+import Deck from './src/Deck';
+
+import { DATA } from './src/data';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-          
-        <Ball />
-        
-      </View>
-    );
-  }
+    renderCard(item) {
+        return (
+            <Card
+                key={item.id}
+                title={item.text}
+                image={{
+                    uri: item.uri
+                }}
+            >
+                <Text style={{ marginBottom: 10 }}>
+                    Long Descriptionssss
+                </Text>
+                <Button
+                    icon={{ name: 'code' }}
+                    backgroundColor="#03A9F4"
+                    title="View"
+                />
+            </Card>
+        );
+    }
+    
+    render() {
+        return (
+            <View style={styles.container}>
+                <Deck
+                    data={DATA}
+                    renderCard={this.renderCard}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

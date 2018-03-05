@@ -23,12 +23,11 @@ class Ball extends Component {
 
 const styles = StyleSheet.create({
     ball: {
-        height: 60,
         width: 60,
-        borderRadius: 30,
+        height: 60,
         borderWidth: 30,
+        borderRadius: 30,
         borderColor: 'black',
-        backgroundColor: 'yellow',
     },
 });
 

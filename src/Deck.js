@@ -23,19 +23,33 @@ class Deck extends React.Component {
         });
     }
     
+    getCardStyle = () => {
+        const rotate = this.position.x.interpolate({
+            inputRange: [ -500, 0, 500 ],
+            outputRange: [ '-120deg', '0deg', '120deg' ],
+        });
+        
+        return {
+            ...this.position.getLayout(),
+            transform: [{ rotate }],
+        };
+    }
+    
     renderCards = () => {
         return this.props.data.map((item, index) => {
             if (index === 0) {
                 return (
                     <Animated.View
                         {...this.responder.panHandlers}
-                        style={this.position.getLayout()}
+                        style={this.getCardStyle()}
                         key={item.id}
                     >
                         {this.props.renderCard(item)}
                     </Animated.View>
                 );
             }
+            
+            return this.props.renderCard(item); 
         });
     }
     

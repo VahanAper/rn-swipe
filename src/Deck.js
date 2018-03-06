@@ -13,8 +13,17 @@ const LEFT = "LEFT";
 const RIGHT = "RIGHT";
 
 class Deck extends React.Component {
+    static defaultProps = {
+        onSwipeLeft: () => {},
+        onSwipeRight: () => {},
+    }
+    
     constructor(props) {
         super(props);
+        
+        this.state = {
+            currentCardIndex: 0,
+        };
         
         this.position = new Animated.ValueXY();
         
@@ -59,14 +68,17 @@ class Deck extends React.Component {
     
     onSwipeComplete = (direction) => {
         const {
+            data,
             onSwipeLeft,
             onSwipeRight,
         } = this.props;
         
+        const item = data[this.state.currentCardIndex];
+        
         direction === LEFT 
-            ? onSwipeLeft()
+            ? onSwipeLeft(item)
             : direction === RIGHT
-                ? onSwipeRight()
+                ? onSwipeRight(item)
                 : () => {};
     }
     

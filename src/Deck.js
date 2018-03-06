@@ -87,7 +87,7 @@ class Deck extends React.Component {
         // Reset position for next card
         this.position.setValue({ x: 0, y: 0 });
                 
-        this.setState({ currentCardIndex: currentCardIndex === data.length - 1 ? 0 : currentCardIndex + 1 });
+        this.setState({ currentCardIndex: currentCardIndex + 1 });
     }
     
     resetPosition = () => {
@@ -115,9 +115,14 @@ class Deck extends React.Component {
     }
     
     renderCards = () => {
+        const { data } = this.props;
         const { currentCardIndex } = this.state;
         
-        return this.props.data.map((item, index) => {
+        if (currentCardIndex >= data.length) {
+            return this.props.renderNoMoreCards();
+        }
+        
+        return data.map((item, index) => {
             if (index < currentCardIndex) {
                 return null;
             }

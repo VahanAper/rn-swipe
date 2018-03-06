@@ -49,6 +49,12 @@ class Deck extends React.Component {
         });
     }
     
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data !== this.props.data) {
+            this.setState({ currentCardIndex: 0 });
+        }
+    }
+    
     componentWillUpdate() {
         // For Android
         UIManager.setLayoutAnimationEnabledExperimental

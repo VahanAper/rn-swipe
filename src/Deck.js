@@ -72,14 +72,22 @@ class Deck extends React.Component {
             onSwipeLeft,
             onSwipeRight,
         } = this.props;
+        const {
+            currentCardIndex,
+        } = this.state;
         
-        const item = data[this.state.currentCardIndex];
+        const item = data[currentCardIndex];
         
         direction === LEFT 
             ? onSwipeLeft(item)
             : direction === RIGHT
                 ? onSwipeRight(item)
                 : () => {};
+        
+        // Reset position for next card
+        this.position.setValue({ x: 0, y: 0 });
+                
+        this.setState({ currentCardIndex: currentCardIndex + 1 });
     }
     
     resetPosition = () => {

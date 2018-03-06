@@ -2,8 +2,10 @@ import React from 'react';
 import {
     View,
     Animated,
+    UIManager,
     Dimensions,
     PanResponder,
+    LayoutAnimation,
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -45,6 +47,14 @@ class Deck extends React.Component {
                 }
             },
         });
+    }
+    
+    componentWillUpdate() {
+        // For Android
+        UIManager.setLayoutAnimationEnabledExperimental
+            && UIManager.setLayoutAnimationEnabledExperimental(true);
+            
+        LayoutAnimation.spring();
     }
     
     forceSwipeCardTo = (direction) => {

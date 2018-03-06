@@ -54,7 +54,20 @@ class Deck extends React.Component {
                 },
                 duration: SWIPTE_OUT_DURATION, // ms
             },
-        ).start();
+        ).start(() => this.onSwipeComplete(direction));
+    }
+    
+    onSwipeComplete = (direction) => {
+        const {
+            onSwipeLeft,
+            onSwipeRight,
+        } = this.props;
+        
+        direction === LEFT 
+            ? onSwipeLeft()
+            : direction === RIGHT
+                ? onSwipeRight()
+                : () => {};
     }
     
     resetPosition = () => {

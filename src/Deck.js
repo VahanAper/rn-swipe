@@ -131,7 +131,11 @@ class Deck extends React.Component {
                 return (
                     <Animated.View
                         {...this.responder.panHandlers}
-                        style={[ this.getCardStyle(), styles.cardStyle, { zIndex: 2 } ]}
+                        style={[
+                            this.getCardStyle(),
+                            styles.cardStyle,
+                            { zIndex: 2 },
+                        ]}
                         key={item.id}
                     >
                         {this.props.renderCard(item)}
@@ -142,7 +146,10 @@ class Deck extends React.Component {
             return (
                 <Animated.View
                     key={item.id}
-                    style={styles.cardStyle}
+                    style={[
+                        styles.cardStyle,
+                        { top: 10 * (index - currentCardIndex) }
+                    ]}
                 >
                     {this.props.renderCard(item)}
                 </Animated.View>

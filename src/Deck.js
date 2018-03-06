@@ -122,7 +122,7 @@ class Deck extends React.Component {
             return this.props.renderNoMoreCards();
         }
         
-        return data.map((item, index) => {
+        const cards = data.map((item, index) => {
             if (index < currentCardIndex) {
                 return null;
             }
@@ -131,7 +131,7 @@ class Deck extends React.Component {
                 return (
                     <Animated.View
                         {...this.responder.panHandlers}
-                        style={this.getCardStyle()}
+                        style={[ this.getCardStyle(), styles.cardStyle, { zIndex: 2 } ]}
                         key={item.id}
                     >
                         {this.props.renderCard(item)}
@@ -139,8 +139,17 @@ class Deck extends React.Component {
                 );
             }
             
-            return this.props.renderCard(item); 
+            return (
+                <View
+                    key={item.id}
+                    style={styles.cardStyle}
+                >
+                    {this.props.renderCard(item)}
+                </View>
+            ); 
         });
+        
+        return cards.reverse();
     }
     
     render() {
@@ -151,5 +160,13 @@ class Deck extends React.Component {
         );
     }
 }
+
+const styles = {
+    cardStyle: {
+        position: 'absolute',
+        width: SCREEN_WIDTH,
+        zIndex: 1,
+    },
+};
 
 export default Deck;

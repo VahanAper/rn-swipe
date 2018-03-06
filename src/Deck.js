@@ -115,8 +115,14 @@ class Deck extends React.Component {
     }
     
     renderCards = () => {
+        const { currentCardIndex } = this.state;
+        
         return this.props.data.map((item, index) => {
-            if (index === 0) {
+            if (index < currentCardIndex) {
+                return null;
+            }
+            
+            if (index === currentCardIndex) {
                 return (
                     <Animated.View
                         {...this.responder.panHandlers}

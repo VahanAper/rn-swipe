@@ -87,7 +87,7 @@ class Deck extends React.Component {
         // Reset position for next card
         this.position.setValue({ x: 0, y: 0 });
                 
-        this.setState({ currentCardIndex: currentCardIndex + 1 });
+        this.setState({ currentCardIndex: currentCardIndex === data.length - 1 ? 0 : currentCardIndex + 1 });
     }
     
     resetPosition = () => {
